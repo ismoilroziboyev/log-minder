@@ -36,24 +36,22 @@ Log Minder is a logging service developed in Go (Golang) using Gin for HTTP serv
 
 2. Declare environment variables:
    ```bash
-    MONGO_USER=admin
-    MONGO_PASSWORD=admin
-    MONGO_DB=database
-    MONGO_ADDR=localhost:27017
-    ADMIN_USER=admin
-    ADMIN_PASSWORD=password
+    MONGO_URI=mongodb://admin:password@localhost:27017/log_minder_db
+   MONGO_DB=log_minder_db
+   ADMIN_USER=admin
+   ADMIN_PASSWORD=password
    
 3. Build and run log-minder application:
    ```bash
    go run main.go
 
-The server should now be running on http://localhost:35468.
+The server should now be running on `http://localhost:35468`.
 
 ### Endpoints
 
 * POST : /v1/logs - endpoint to insert logs;
 * GET: /v1/logs - endpoint to retreive logs with filter options;
-* GET: /v1/swagger/index.html - swagger documentation for log-minder http server apis; 
+* GET: /v1/swagger/index.html -  Swagger documentation for Log Minder HTTP server APIs.; 
 
 ### Future Tasks
 
