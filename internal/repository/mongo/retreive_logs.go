@@ -39,7 +39,13 @@ func (m *mongo) RetreiveLogs(ctx context.Context, payload *domain.RetreiveLogsFi
 		filter["created_at"] = bson.M{"$lt": payload.ToDate}
 	}
 
-	cur, err := m.Database(m.cfg.MongoDB).Collection(collectionLogs).Find(ctx, filter, options.Find().SetSkip(int64(payload.Offset)).SetLimit(int64(payload.Limit)))
+	cur, err := m.Database(m.cfg.MongoDB).
+		Collection(collectionLogs).
+		Find(ctx, filter, options.
+			Find().
+			SetSort(map[string]int{"created_at": -1}).
+			SetSkip(int64(payload.Offset)).
+			SetLimit(int64(payload.Limit)))
 
 	if err != nil {
 		return nil, errors.NewInternalServerErrorw("cannot get documents", err)
