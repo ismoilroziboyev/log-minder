@@ -40,8 +40,6 @@ Log Minder is a logging service developed in Go (Golang) using Gin for HTTP serv
     MONGO_PASSWORD=admin
     MONGO_DB=database
     MONGO_ADDR=localhost:27017
-    HTTP_HOST=localhost
-    HTTP_PORT=35468
     ADMIN_USER=admin
     ADMIN_PASSWORD=password
    
@@ -49,7 +47,7 @@ Log Minder is a logging service developed in Go (Golang) using Gin for HTTP serv
    ```bash
    go run main.go
 
-The server should now be running on $HTTP_HOST:$HTTP_PORT.
+The server should now be running on localhost:35468.
 
 ### Endpoints
 
