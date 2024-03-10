@@ -47,7 +47,7 @@ Log Minder is a logging service developed in Go (Golang) using Gin for HTTP serv
    ```bash
    go run main.go
 
-The server should now be running on localhost:35468.
+The server should now be running on http://localhost:35468.
 
 ### Endpoints
 
