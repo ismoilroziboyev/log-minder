@@ -35,11 +35,8 @@ func New(cfg *config.Config, services *services.Service) *HttpServer {
 // @title LOG-MINDER APPLICATION API DOCUMENTATION
 // @description This API contains the source for the LOG-MINDER  app
 
-// @securityDefinitions.apikey UsersAuth
-// @in header
-// @name Authorization
-
-// @BasePath /api/v1
+// @securityDefinitions.basic UsersAuth
+// @BasePath /v1
 
 // Run initializes http server
 func (s *HttpServer) Run() error {

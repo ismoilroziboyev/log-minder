@@ -1,12 +1,166 @@
-basePath: /api/v1
+basePath: /v1
+definitions:
+  domain.Action:
+    properties:
+      details:
+        additionalProperties: true
+        type: object
+      type:
+        type: string
+    required:
+    - type
+    type: object
+  domain.CommonResponse:
+    properties:
+      error:
+        type: string
+      message:
+        type: string
+      status_code:
+        type: integer
+    type: object
+  domain.InsertLogPayload:
+    properties:
+      action:
+        $ref: '#/definitions/domain.Action'
+      message:
+        type: string
+      user:
+        $ref: '#/definitions/domain.User'
+    required:
+    - action
+    - message
+    - user
+    type: object
+  domain.Log:
+    properties:
+      action:
+        $ref: '#/definitions/domain.Action'
+      created_at:
+        type: string
+      id:
+        type: string
+      message:
+        type: string
+      user:
+        $ref: '#/definitions/domain.User'
+    type: object
+  domain.RetreiveLogsResponse:
+    properties:
+      limit:
+        type: integer
+      logs:
+        items:
+          $ref: '#/definitions/domain.Log'
+        type: array
+      offset:
+        type: integer
+      total:
+        type: integer
+      total_pages:
+        type: integer
+    type: object
+  domain.User:
+    properties:
+      details:
+        additionalProperties: true
+        type: object
+      full_name:
+        type: string
+      id:
+        type: string
+      role:
+        type: string
+    required:
+    - full_name
+    - id
+    - role
+    type: object
 info:
   contact: {}
   description: This API contains the source for the LOG-MINDER  app
   title: LOG-MINDER APPLICATION API DOCUMENTATION
-paths: {}
+paths:
+  /logs:
+    get:
+      parameters:
+      - in: query
+        name: action_type
+        type: string
+      - in: query
+        name: from
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: offset
+        type: integer
+      - in: query
+        name: search
+        type: string
+      - in: query
+        name: to
+        type: string
+      - in: query
+        name: user_id
+        type: string
+      - in: query
+        name: user_role
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.RetreiveLogsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.CommonResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.CommonResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.CommonResponse'
+      security:
+      - UsersAuth: []
+      summary: retreive logs request
+      tags:
+      - logs
+    post:
+      parameters:
+      - description: payload
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/domain.InsertLogPayload'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.CommonResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.CommonResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.CommonResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.CommonResponse'
+      security:
+      - UsersAuth: []
+      summary: insert logs request
+      tags:
+      - logs
 securityDefinitions:
   UsersAuth:
-    in: header
-    name: Authorization
-    type: apiKey
+    type: basic
 swagger: "2.0"

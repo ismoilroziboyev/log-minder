@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"context"
-	"strconv"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -55,7 +54,7 @@ func (h *Handler) handleError(c *gin.Context, err error) {
 		return
 	}
 
-	lang := h.getLang(c)
+	lang := "en"
 	errCause := myErr.Error()
 	errLangMsg := myErr.ErrorI18nMsg(lang)
 	errCode := myErr.Code()
@@ -69,20 +68,4 @@ func (h *Handler) handleError(c *gin.Context, err error) {
 
 func (h *Handler) makeContext(c *gin.Context) (context.Context, context.CancelFunc) {
 	return context.WithTimeout(c, time.Second*5)
-}
-
-func (h *Handler) getUserId(c *gin.Context) string {
-	return c.GetString("user_id")
-}
-
-func (h *Handler) getUserRole(c *gin.Context) string {
-	return c.GetString("role")
-}
-
-func (h *Handler) getLang(c *gin.Context) string {
-	return c.GetString("lang")
-}
-
-func (h *Handler) extractPathID(c *gin.Context, key string) (int64, error) {
-	return strconv.ParseInt(c.Param(key), 10, 64)
 }

@@ -16,6 +16,8 @@ const (
 )
 
 type MongoDB interface {
+	CountLogs(ctx context.Context, payload *domain.RetreiveLogsFilter) (int64, error)
+	RetreiveLogs(ctx context.Context, payload *domain.RetreiveLogsFilter) ([]domain.Log, error)
 	InsertLog(ctx context.Context, payload *domain.InsertLogPayload) error
 	Close(ctx context.Context) error
 }

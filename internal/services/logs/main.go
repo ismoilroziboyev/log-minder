@@ -10,6 +10,7 @@ import (
 
 type LogsService interface {
 	Insert(ctx context.Context, payload *domain.InsertLogPayload) error
+	Retreive(ctx context.Context, payload *domain.RetreiveLogsFilter) (*domain.RetreiveLogsResponse, error)
 }
 
 type service struct {
