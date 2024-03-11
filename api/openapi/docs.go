@@ -29,6 +29,11 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "name": "action_details",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
                         "name": "action_type",
                         "in": "query"
                     },
@@ -55,6 +60,11 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "name": "to",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "user_details",
                         "in": "query"
                     },
                     {

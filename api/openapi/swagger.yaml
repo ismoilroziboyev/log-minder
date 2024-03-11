@@ -85,6 +85,9 @@ paths:
     get:
       parameters:
       - in: query
+        name: action_details
+        type: string
+      - in: query
         name: action_type
         type: string
       - in: query
@@ -101,6 +104,9 @@ paths:
         type: string
       - in: query
         name: to
+        type: string
+      - in: query
+        name: user_details
         type: string
       - in: query
         name: user_id
