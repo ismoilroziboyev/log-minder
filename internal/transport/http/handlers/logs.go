@@ -41,20 +41,20 @@ func (h *Handler) insertLog(c *gin.Context) {
 
 // @Summary retreive logs request
 // @Tags logs
-// @Param filter query domain.RetreiveLogsFilter true "filter"
+// @Param request body domain.RetreiveLogsFilter true "filter"
 // @Success 200 {object} domain.RetreiveLogsResponse
 // @Failure 400 {object} domain.CommonResponse
 // @Failure 401 {object} domain.CommonResponse
 // @Failure 500 {object} domain.CommonResponse
 // @Security UsersAuth
-// @Router /logs [get]
+// @Router /logs/retreive [post]
 func (h *Handler) retreiveLogs(c *gin.Context) {
 	ctx, cancel := h.makeContext(c)
 	defer cancel()
 
 	var payload domain.RetreiveLogsFilter
 
-	if err := c.ShouldBindQuery(&payload); err != nil {
+	if err := c.ShouldBind(&payload); err != nil {
 		h.handleError(c, errors.NewBadRequestErrorw("cannot parse query params", err))
 		return
 	}

@@ -24,8 +24,6 @@ func (p *Pagination) calculatePages() {
 }
 
 type BasicFilter struct {
-	Limit  int32  `json:"limit" form:"limit"`
-	Offset int32  `json:"offset" form:"offset"`
-	Search string `json:"search" form:"search"`
-	Lang   string `json:"lang" form:"lang" swaggerignore:"true"`
+	Limit  int32 `json:"limit" form:"limit"`
+	Offset int32 `json:"offset" form:"offset"`
 }

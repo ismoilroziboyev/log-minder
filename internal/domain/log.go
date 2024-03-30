@@ -22,15 +22,7 @@ type InsertLogPayload struct {
 
 type RetreiveLogsFilter struct {
 	BasicFilter
-	UserID        string    `json:"user_id" form:"user_id"`
-	ActionType    string    `json:"action_type" form:"action_type"`
-	UserRole      string    `json:"user_role" form:"user_role"`
-	From          string    `json:"from" form:"from"`
-	To            string    `json:"to" form:"to"`
-	FromDate      time.Time `json:"from_date" swaggerignore:"true"`
-	ToDate        time.Time `json:"to_date" swaggerignore:"true"`
-	UserDetails   string    `json:"user_details" form:"user_details"`
-	ActionDetails string    `json:"action_details" form:"action_details"`
+	Query map[string]interface{} `json:"query"`
 }
 
 type Log struct {

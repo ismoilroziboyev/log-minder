@@ -45,6 +45,16 @@ definitions:
       user:
         $ref: '#/definitions/domain.User'
     type: object
+  domain.RetreiveLogsFilter:
+    properties:
+      limit:
+        type: integer
+      offset:
+        type: integer
+      query:
+        additionalProperties: true
+        type: object
+    type: object
   domain.RetreiveLogsResponse:
     properties:
       limit:
@@ -82,60 +92,6 @@ info:
   title: LOG-MINDER APPLICATION API DOCUMENTATION
 paths:
   /logs:
-    get:
-      parameters:
-      - in: query
-        name: action_details
-        type: string
-      - in: query
-        name: action_type
-        type: string
-      - in: query
-        name: from
-        type: string
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: offset
-        type: integer
-      - in: query
-        name: search
-        type: string
-      - in: query
-        name: to
-        type: string
-      - in: query
-        name: user_details
-        type: string
-      - in: query
-        name: user_id
-        type: string
-      - in: query
-        name: user_role
-        type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/domain.RetreiveLogsResponse'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/domain.CommonResponse'
-        "401":
-          description: Unauthorized
-          schema:
-            $ref: '#/definitions/domain.CommonResponse'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/domain.CommonResponse'
-      security:
-      - UsersAuth: []
-      summary: retreive logs request
-      tags:
-      - logs
     post:
       parameters:
       - description: payload
@@ -164,6 +120,37 @@ paths:
       security:
       - UsersAuth: []
       summary: insert logs request
+      tags:
+      - logs
+  /logs/retreive:
+    post:
+      parameters:
+      - description: filter
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/domain.RetreiveLogsFilter'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.RetreiveLogsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.CommonResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.CommonResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.CommonResponse'
+      security:
+      - UsersAuth: []
+      summary: retreive logs request
       tags:
       - logs
 securityDefinitions:

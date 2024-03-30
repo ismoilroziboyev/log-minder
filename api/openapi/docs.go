@@ -16,95 +16,6 @@ const docTemplate = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/logs": {
-            "get": {
-                "security": [
-                    {
-                        "UsersAuth": []
-                    }
-                ],
-                "tags": [
-                    "logs"
-                ],
-                "summary": "retreive logs request",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "name": "action_details",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "name": "action_type",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "name": "from",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "name": "offset",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "name": "search",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "name": "to",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "name": "user_details",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "name": "user_id",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "name": "user_role",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/domain.RetreiveLogsResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/domain.CommonResponse"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/domain.CommonResponse"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/domain.CommonResponse"
-                        }
-                    }
-                }
-            },
             "post": {
                 "security": [
                     {
@@ -131,6 +42,56 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/domain.CommonResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/domain.CommonResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/domain.CommonResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/domain.CommonResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/logs/retreive": {
+            "post": {
+                "security": [
+                    {
+                        "UsersAuth": []
+                    }
+                ],
+                "tags": [
+                    "logs"
+                ],
+                "summary": "retreive logs request",
+                "parameters": [
+                    {
+                        "description": "filter",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/domain.RetreiveLogsFilter"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.RetreiveLogsResponse"
                         }
                     },
                     "400": {
@@ -221,6 +182,21 @@ const docTemplate = `{
                 },
                 "user": {
                     "$ref": "#/definitions/domain.User"
+                }
+            }
+        },
+        "domain.RetreiveLogsFilter": {
+            "type": "object",
+            "properties": {
+                "limit": {
+                    "type": "integer"
+                },
+                "offset": {
+                    "type": "integer"
+                },
+                "query": {
+                    "type": "object",
+                    "additionalProperties": true
                 }
             }
         },
