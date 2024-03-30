@@ -11,6 +11,7 @@ type User struct {
 
 type Action struct {
 	Type    string                 `json:"type" bson:"type,omitempty" binding:"required"`
+	Model   string                 `json:"model" bson:"model,omitempty" binding:"required"`
 	Details map[string]interface{} `json:"details" bson:"details,omitempty"`
 }
 type InsertLogPayload struct {
