@@ -5,6 +5,7 @@ import (
 
 	"github.com/ismoilroziboyev/go-pkg/errors"
 	"github.com/ismoilroziboyev/log-minder/internal/domain"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
@@ -17,10 +18,9 @@ func (m *mongo) RetreiveLogs(ctx context.Context, payload *domain.RetreiveLogsFi
 	if payload.Offset < 0 {
 		payload.Offset = 0
 	}
-
 	cur, err := m.Database(m.cfg.MongoDB).
 		Collection(collectionLogs).
-		Find(ctx, payload.Query, options.
+		Find(ctx, bson.M(payload.Query), options.
 			Find().
 			SetSort(map[string]int{"created_at": -1}).
 			SetSkip(int64(payload.Offset)).

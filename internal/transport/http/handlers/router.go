@@ -14,7 +14,7 @@ func (h *Handler) API() http.Handler {
 	router := engine.Group("v1")
 	{
 		router.POST("/logs", h.authenticate(), h.insertLog)
-		router.GET("/logs", h.authenticate(), h.retreiveLogs)
+		router.POST("/logs/retreive", h.authenticate(), h.retreiveLogs)
 
 		router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	}
