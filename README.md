@@ -50,7 +50,7 @@ The server should now be running on `http://localhost:35468`.
 ### Endpoints
 
 * POST : /v1/logs - endpoint to insert logs;
-* GET: /v1/logs - endpoint to retreive logs with filter options;
+* POST: /v1/logs/retreive - endpoint to retreive logs with filter options;
 * GET: /v1/swagger/index.html -  Swagger documentation for Log Minder HTTP server APIs.; 
 
 ### Future Tasks
